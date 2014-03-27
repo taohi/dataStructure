@@ -11,3 +11,21 @@ void shellsort(int v[],int n)
                 v[j+gap]=temp;
             }
 }
+
+void main()
+{
+    int i;
+    int num[]={1,3,6,2,8,4,9,0,7,12,16};
+    for(i=0;i<11;i++)
+    {
+        printf("%d\t",num[i]);
+    }
+    printf("\n");
+    shellsort(num,11);
+    for(i=0;i<11;i++)
+    {
+        printf("%d\t",num[i]);
+    }
+    printf("\n");
+}
+
