@@ -26,13 +26,12 @@ void month_day(int year,int yearday,int *pmonth,int *pday)
 void main()
 {
     int year,month,day,yearday;
-    int *pday,*pmonth;
     year=2014;
     month=4;
     day=3;
     printf("%d-%d-%d is the %d day of the year.\n",year,month,day,day_of_year(year,month,day));
 
     yearday=93;
-    month_day(year,yearday,pmonth,pday);
-    printf("%d day of %d is Month:%d,day:%d\n",yearday,year,pmonth,pday);
+    month_day(year,yearday,&month,&day);
+    printf("%d day of %d is Month:%d,day:%d\n",yearday,year,month,day);
 }
