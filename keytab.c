@@ -60,7 +60,7 @@ int binsearch(char *word,struct key tab[],int n)
     }
     return -1;
 }
-
+ 
 int getword(char *word,int lim)
 {
     char *w = word;
