@@ -19,10 +19,6 @@ void qsort(int v[],int left,int right)
         if(v[i]<v[left])
             swap(v,++last,i);
     swap(v,left,last);
-//    i=0;
-//    while(i<=right)
-//        printf("%d\t",v[i++]);
-//    printf("\n");
     qsort(v,left,last-1);
     qsort(v,last+1,right);
 }
