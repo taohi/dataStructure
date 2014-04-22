@@ -51,23 +51,6 @@ void quick_sort(int *a,int left,int right)
     quick_sort(a,last+1,right);
 }
 
-/*
- *This is the simplest,but not best edition.
-void insertion_sort(int *a,int n)
-{
-    int i,j;
-    for(i=1;i<n;i++)
-    {
-        j=i;
-        while(j>0 &&a[j-1]>a[j])
-        {
-            swap(a,j-1,j); 
-            j-=1;
-        }
-    }
-}
-*/
-
 //O(n**2) Stable
 void insertion_sort(int *a,int n)
 {
@@ -139,6 +122,7 @@ void main()
     int a5[]={13,0,5,8,1,7,21,50,9,2};
     int a6[]={13,0,5,8,1,7,21,50,9,2};
     int a7[]={13,0,5,8,1,7,21,50,9,2};
+    int a8[]={13,0,5,8,1,7,21,50,9,2};
     bubble_sort(a1,10);     print(a1,10);
     select_sort(a2,10);     print(a2,10);
     quick_sort(a3,0,9);     print(a3,10);
@@ -146,4 +130,6 @@ void main()
     shell_insert_sort(a5,10);print(a5,10);
     heap_sort(a6,10);       print(a6,10);
 
+    //如果排序前要手动获得数组长度，用sizeof：
+    printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
 }
