@@ -19,7 +19,7 @@ void bubble_sort(int *a,int n)
     }
 }
 
-//O(n**2) Stable
+//O(n**2) Not Stable
 //和冒泡类似，只是减少了盲目交换的次数。
 void select_sort(int *a,int n)
 {
