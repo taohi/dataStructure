@@ -7,6 +7,12 @@ typedef struct tNode{
     struct tNode *rchild;
 }treeNode;
 
+/*
+*以下函数中，涉及修改二叉树，用二级指针；
+*涉及统计、查找的，用一级指针就行。
+*这是函数传参特性,实参形参不同。
+*/
+
 //二叉树的先序遍历递归方法
 void PreOrderTraverse(treeNode *T)
 {
@@ -37,8 +43,8 @@ void PostOrderTraverse(treeNode * T)
     printf("%d\t",T->data);
 }
 
-//二叉树的插入，按值x大小选择合适的位置插入新结点
-void insertTree(treeNode ** pT,int x)
+//按值x大小插入，构建二叉排序树BST
+void insertBST(treeNode ** pT,int x)
 {
     treeNode *p=(treeNode *)malloc(sizeof(treeNode));
     if(!p)
@@ -49,16 +55,29 @@ void insertTree(treeNode ** pT,int x)
     p->data=x;
     p->lchild=NULL;
     p->rchild=NULL;
-
     if(*pT == NULL)
     {
         *pT=p;
         return ;
     }
     if(x<(*pT)->data)
-        insertTree(&((*pT)->lchild),x);
+        insertBST(&((*pT)->lchild),x);
     else
-        insertTree(&((*pT)->rchild),x);
+        insertBST(&((*pT)->rchild),x);
+}
+
+//Binary Sorted Tree:二叉排序树
+//判断值x是否在给定的二叉排序树中。
+int searchBST(treeNode *T,int x)
+{
+   if(T==NULL) 
+       return 0;
+   else if(T->data == x)
+       return 1;
+   else if(x < T->data)
+       return searchBST(T->lchild,x);
+   else
+       return searchBST(T->rchild,x);
 }
 
 //释放掉整个二叉树
@@ -74,18 +93,19 @@ void freeTree(treeNode **pT)
     return;
 }
 
-/*
 //统计二叉树的叶结点递归方法
 int countLeaf(treeNode *T)
 {
     int counter=0;
-    if(T && (T->lchild==NULL) && (T->rchild==NULL))
+    if(T!=NULL)
     {
-        counter++;
-        return counter;
+        counter+= countLeaf(T->lchild);
+        counter+= countLeaf(T->rchild);
+        if((T->lchild==NULL) && (T->rchild==NULL))
+            counter++;
     }
+        return counter;
 }
-*/
 
 //计算二叉树的深度递归方法
 int treeDepth(treeNode *T)
@@ -108,17 +128,19 @@ int treeDepth(treeNode *T)
 void main()
 {
     int n[10] = {3,2,4,1,7,6,5,8,10,9};
-    int i=0;
+    int i=0,find_key=1;
     treeNode *T=NULL;
     //构建二叉排序树，依次插入数组元素
     while(i<10)
     {
-        insertTree(&T,n[i]);
+        insertBST(&T,n[i]);
         i++;
     }
     printf("PreOrder:\t"); PreOrderTraverse(T); printf("\n");
     printf("InOrder:\t"); InOrderTraverse(T); printf("\n");
     printf("PostOrder:\t"); PostOrderTraverse(T); printf("\n");
-    printf("depth:%d\n",treeDepth(T));
+    printf("tree depth:%d\n",treeDepth(T));
+    printf("tree leaves:%d\n",countLeaf(T));
+    printf("%d is %s in BST tree.\n",find_key,searchBST(T,find_key)?"":"not");
     freeTree(&T);
 }
