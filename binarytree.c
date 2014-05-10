@@ -74,6 +74,37 @@ void freeTree(treeNode **pT)
     return;
 }
 
+/*
+//统计二叉树的叶结点递归方法
+int countLeaf(treeNode *T)
+{
+    int counter=0;
+    if(T && (T->lchild==NULL) && (T->rchild==NULL))
+    {
+        counter++;
+        return counter;
+    }
+}
+*/
+
+//计算二叉树的深度递归方法
+int treeDepth(treeNode *T)
+{
+    int ldepth=0;
+    int rdepth=0;
+    if(!T)
+        return 0;
+    else
+    {
+        ldepth=treeDepth(T->lchild);
+        rdepth=treeDepth(T->rchild);
+    }
+    if(ldepth>rdepth)
+        return ldepth+1;
+    else 
+        return rdepth+1;
+}
+
 void main()
 {
     int n[10] = {3,2,4,1,7,6,5,8,10,9};
@@ -88,5 +119,6 @@ void main()
     printf("PreOrder:\t"); PreOrderTraverse(T); printf("\n");
     printf("InOrder:\t"); InOrderTraverse(T); printf("\n");
     printf("PostOrder:\t"); PostOrderTraverse(T); printf("\n");
+    printf("depth:%d\n",treeDepth(T));
     freeTree(&T);
 }
