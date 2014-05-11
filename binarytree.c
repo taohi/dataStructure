@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "queue.h"
 //二叉树的结点结构体
 typedef struct tNode{
     int data;
@@ -43,6 +44,38 @@ void PostOrderTraverse(treeNode * T)
     printf("%d\t",T->data);
 }
 
+/*二叉树层序遍历（使用链式队列）
+ *过程描述： 
+ * 1.初始化一个队列queue;
+ * 2.根结点T入队列;
+ * 3.while(队列不为空):
+ *  3.1:queue的队头q出队列;
+ *  3.2:访问q的data域;
+ *  3.3:如果q有左孩子，左孩子入队列;
+ *  3.4:如果q有右孩子，右孩子入队列;
+ *  使用C++的deque容器实现如下：
+ * void levelTraverse(treeNode *T) 
+ * {
+ *      deque<treeNode *>nodeQueue;
+ *      if(!T)
+ *      {
+ *          nodeQueue.push_back(T);
+ *          while(!nodeQueue.empty())
+ *          {
+ *              treeNode *pHead=nodeQueue.at(0);
+ *              printf("%d\t",pHead->data);
+ *              nodeQueue.pop_front();
+ *              if(pHead->lchild)
+ *                  nodeQueue.push_back(pHead->lchild);
+ *              if(pHead->rchild)
+ *                  nodeQueue.push_back(pHead->rchild);
+ *          }
+ *      }
+ * }
+ */
+
+
+    
 //按值x大小插入，构建二叉排序树BST
 void insertBST(treeNode ** pT,int x)
 {

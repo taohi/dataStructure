@@ -5,33 +5,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Queue *InitQueue()
+queue *InitQueue()
 {
-    queue *pHead=(queue *)malloc(sizeof(queue));
-    if(!pHead)
-        exit(0);
-    pHead->front=pHead;
-    pHead->rear=pHead;
-    pHead->size=0;
-    return pHead;
+    queue *pqueue=(queue *)malloc(sizeof(queue));
+    pqueue->front=NULL;
+    pqueue->rear=NULL;
+    pqueue->size=0;
+    return pqueue;
 }
 
-QNode *EnQueue(queue *pHead,QElemType e)
+node *EnQueue(queue *pqueue,QElemType e)
 {
     node *pNode=(node *)malloc(sizeof(node));
     if(!pNode)
         exit(0);
     pNode->data = e;
     pNode->next=NULL;
-    if(QueueEmpty(pHead))
-    {
-        pHead->front=pNode;
-        pHead->rear =pNode;
-    }
+    if(QueueEmpty(pqueue))
+        pqueue->front=pNode;
     else
-        pHead->rear->next = pNode;
-    pqueue->rear = pQNode;
+        pqueue->rear->next = pNode;
+    pqueue->rear = pNode;
     pqueue->size++;
-    return 
-
+    return pNode;
 }
+
+
+node *DeQueue(queue *pqueue,QElemType *pe)
+{
+    if(QueueEmpty(pqueue))
+        return NULL;
+    else
+    {
+        node *pNode = pqueue->front;
+        if(pe)
+            *pe=pNode->data;
+        pqueue->size--;
+        pqueue->front = pNode->next;
+        if(pqueue->size == 0)
+            pqueue->rear=NULL;
+        free(pNode);
+        return pqueue->front;
+    }
+}
+
+int QueueEmpty(queue *pqueue)
+{
+    if(pqueue->front==NULL && pqueue->rear == NULL && pqueue->size ==0)
+        return 1;
+    else
+        return 0;
+}
+
+

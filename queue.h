@@ -16,14 +16,14 @@ typedef struct{
 }queue;
 
 queue *InitQueue();
-void DestroyQueue(queue *pHead);
-void ClearQueue(queue *pHead);
-int QueueEmpty(queue *pHead);
-node *GetHead(queue *pHead);
-node *GetGear(queue *pHead);
-node *EnQueue(queue *pHead,QElemType e);
-node *DeQueue(queue *pHead,QElemType *pe);
-int QueueSize(queue *pHead);
+void DestroyQueue(queue *pqueue);
+void ClearQueue(queue *pqueue);
+int QueueEmpty(queue *pqueue);
+node *GetHead(queue *pqueue);
+node *GetGear(queue *pqueue);
+node *EnQueue(queue *pqueue,QElemType e);
+node *DeQueue(queue *pqueue,QElemType *pe);
+int QueueSize(queue *pqueue);
 
 
 #endif    
