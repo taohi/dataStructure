@@ -24,3 +24,6 @@ int strlen2(char *s)
        p++; 
     return p-s;
 }
+
+//还有一种方法是:已知数组名，则：
+//strlen=sizeof(s)/sizeof(s[0])
