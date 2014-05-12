@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "queue.h"
 //二叉树的结点结构体
 typedef struct tNode{
     int data;
@@ -161,7 +160,7 @@ int treeDepth(treeNode *T)
 void main()
 {
     int n[10] = {3,2,4,1,7,6,5,8,10,9};
-    int i=0,find_key=1;
+    int i=0,find_key=8;
     treeNode *T=NULL;
     //构建二叉排序树，依次插入数组元素
     while(i<10)
