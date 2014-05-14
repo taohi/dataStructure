@@ -5,7 +5,6 @@
 int simple_index(char s[],char t[],int pos)
 {
     int i=pos,j=0;
-    int cmp_count=0;
     int n=strlen(s);
     int m=strlen(t);
     while(i<n && j<m)
@@ -20,9 +19,7 @@ int simple_index(char s[],char t[],int pos)
             i=i-j+1;
             j=0;
         }
-        cmp_count++;
     }
-    printf("cmp_count = %d\n",cmp_count);
     if(j=m)//t的每个字符都匹配完,说明匹配到了
         return i-j;
     else 
@@ -35,7 +32,7 @@ void get_next(char t[],int *next)
 {
     int i=0,j=-1;
     next[0]=-1;
-    m=strlen(t);
+    int m=strlen(t);
     while(i<m)
     {
         if(j==-1||t[i]==t[j])
@@ -49,13 +46,37 @@ void get_next(char t[],int *next)
     }
 }
 
+//KMP算法改进版：将get_next改为get_nextval
+//时间空间复杂度没有变,匹配次数减少
+void get_nextval(char t[],int *nextval)
+{
+    int i=0,j=-1;
+    int m=strlen(t);
+    nextval[0]=-1;
+    while(i<m)
+    {
+        if(j==-1||t[i]==t[j])
+        {
+            i++;
+            j++;
+            if(t[i]!=t[j])
+                nextval[i]=j;
+            else
+                nextval[i]=nextval[j];
+        }
+        else
+            j=nextval[j];
+    }
+}
+
 int index_KMP(char s[],char t[],int pos)
 {
     int i=pos,j=0;
     int n=strlen(s);
     int m=strlen(t);
     int next[255];
-    get_next(t,next);
+    //get_next(t,next);
+    get_nextval(t,next);
     while(i<n && j<m)
     {
         if(j==-1||s[i]==t[j])
@@ -73,11 +94,6 @@ int index_KMP(char s[],char t[],int pos)
     else 
         return 0;
 }
-
-//KMP算法改进版：将get_next改为get_nextval
-//时间空间复杂度没有变,匹配次数减少
-
-
 
 void main()
 {
