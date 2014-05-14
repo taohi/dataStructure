@@ -2,9 +2,10 @@
 #include <string.h>
 //朴素子串查找：返回子串T在母串S中第pos个字符之后首次出现的位置。
 //若不存在，则函数返回0 时间复杂度O((n-m+1)*m),空间复杂度O(1)
-int index(char s[],char t[],int pos)
+int simple_index(char s[],char t[],int pos)
 {
     int i=pos,j=0;
+    int cmp_count=0;
     int n=strlen(s);
     int m=strlen(t);
     while(i<n && j<m)
@@ -19,7 +20,9 @@ int index(char s[],char t[],int pos)
             i=i-j+1;
             j=0;
         }
+        cmp_count++;
     }
+    printf("cmp_count = %d\n",cmp_count);
     if(j=m)//t的每个字符都匹配完,说明匹配到了
         return i-j;
     else 
@@ -30,7 +33,20 @@ int index(char s[],char t[],int pos)
 //时间复杂度O(m+n),空间复杂度O(m);
 void get_next(char t[],int *next)
 {
-
+    int i=0,j=-1;
+    next[0]=-1;
+    m=strlen(t);
+    while(i<m)
+    {
+        if(j==-1||t[i]==t[j])
+        {
+            i++;
+            j++;
+            next[i]=j;
+        }
+        else
+            j=next[j];
+    }
 }
 
 int index_KMP(char s[],char t[],int pos)
@@ -42,7 +58,7 @@ int index_KMP(char s[],char t[],int pos)
     get_next(t,next);
     while(i<n && j<m)
     {
-        if(s[i]==t[j])
+        if(j==-1||s[i]==t[j])
         {
             i++;
             j++;
@@ -59,17 +75,26 @@ int index_KMP(char s[],char t[],int pos)
 }
 
 //KMP算法改进版：将get_next改为get_nextval
-//时间空间复杂度没有变
+//时间空间复杂度没有变,匹配次数减少
 
 
 
 void main()
 {
-    char s[]="hello this is the human world.";
-    char t[]="human";
-    int pos=index(s,t,4);
-    if(pos)
-        printf("t is in pos %d of s.\n",flag);
+    char s[]="abcabcdabcabceabcabcabcabcxab";
+    char t[]="abcabcx";
+    int pos1=simple_index(s,t,2);
+    int pos2=index_KMP(s,t,2);
+
+    printf("simple_index:\t");
+    if(pos1)
+        printf("t is in pos %d of s.\n",pos1);
+    else
+        printf("t isn't in s.\n");
+
+    printf("index_KMP:\t");
+    if(pos2)
+        printf("t is in pos %d of s.\n",pos2);
     else
         printf("t isn't in s.\n");
 }
