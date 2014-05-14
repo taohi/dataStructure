@@ -105,6 +105,24 @@ void heap_sort(int *a,int n)
     }
 }
 
+//O(nlogn) Stable. spare space  O(n+logn)
+void merge(int *a,int left,int m,int right)
+{
+
+}
+void merge_sort(int *a,int left,int right)
+{
+    int i=0;
+    if(left<right) 
+    {
+        i=(left + right)/2;
+        merge_sort(a,left,i);
+        merge_sort(a,i+1,right);
+        merge(a,left,i,right);
+
+    }
+}
+
 void print(int *a,int n)
 {
     int i;
@@ -131,5 +149,5 @@ void main()
     heap_sort(a6,10);       print(a6,10);
 
     //如果排序前要手动获得数组长度，用sizeof：
-    printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
+    //printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
 }
