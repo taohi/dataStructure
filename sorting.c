@@ -105,6 +105,7 @@ void heap_sort(int *a,int n)
     }
 }
 
+//归并排序，递归版本
 //O(nlogn) Stable. spare space  O(n+logn)
 void merge(int *a,int left,int m,int right)
 {
@@ -119,7 +120,6 @@ void merge_sort(int *a,int left,int right)
         merge_sort(a,left,i);
         merge_sort(a,i+1,right);
         merge(a,left,i,right);
-
     }
 }
 
