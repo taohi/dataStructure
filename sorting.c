@@ -106,14 +106,13 @@ void heap_sort(int *a,int n)
     }
 }
 
-//归并排序，递归版本
-//O(nlogn) Stable. spare space  O(n+logn)
 void merge(int *array,int left,int m,int right)
 {
     int i,j,k=0,l;
     //merged动态临时数组,将有序的array[left...m]和有序的array[m+1...right]
     //归并成新的有序数组存放到merged中
     int *merged=(int *)malloc(sizeof(int)*(right-left+1));
+   // printf("merge--[%d %d] [%d %d]\n",left,m,m+1,right);
     for(i=left,j=m+1;i<=m && j<=right;k++)
     {
         if(array[i]<=array[j])
@@ -139,9 +138,12 @@ void merge(int *array,int left,int m,int right)
     free(merged);
 }
 
+//归并排序，递归版本
+//O(nlogn) Stable. spare space  O(n+logn)
 void merge_sort(int *a,int left,int right)
 {
     int i=0;
+    printf("dividing--[%d %d]\n",left,right);
     if(left<right) 
     {
         i=(left + right)/2;
@@ -151,6 +153,12 @@ void merge_sort(int *a,int left,int right)
     }
 }
 
+//归并排序，非递归版(推荐)
+void merge_sort2(int *a,int left,int right)
+{
+    int i=0,k=0;
+//    for()
+}
 void print(int *a,int n)
 {
     int i;
@@ -176,6 +184,7 @@ void main()
     shell_insert_sort(a5,10);print(a5,10);
     heap_sort(a6,10);       print(a6,10);
     merge_sort(a7,0,9);     print(a7,10);
+//    merge_sort2(a8,0,9);    print(a8,10);
 
     //如果排序前要手动获得数组长度，用sizeof：
     //printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
