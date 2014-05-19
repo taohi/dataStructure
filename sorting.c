@@ -113,7 +113,7 @@ void merge(int *array,int left,int m,int right)
     int i,j,k=0,l;
     //merged动态临时数组,将有序的array[left...m]和有序的array[m+1...right]
     //归并成新的有序数组存放到merged中
-    int *merged=(int *)malloc(sizeof(int)*(right+1));
+    int *merged=(int *)malloc(sizeof(int)*(right-left+1));
     for(i=left,j=m+1;i<=m && j<=right;k++)
     {
         if(array[i]<=array[j])
