@@ -210,5 +210,5 @@ void main()
     merge_sort(a8,0,9);    print(a8,10);
 
     //如果排序前要手动获得数组长度，用sizeof：
-    //printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
+    //printf("Array a1 length =%d\n",sizeof(a1)/sizeof(a1[0]));
 }
