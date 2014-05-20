@@ -140,25 +140,48 @@ void merge(int *array,int left,int m,int right)
 
 //归并排序，递归版本
 //O(nlogn) Stable. spare space  O(n+logn)
-void merge_sort(int *a,int left,int right)
+void merge_sort_rec(int *a,int left,int right)
 {
     int i=0;
-    printf("dividing--[%d %d]\n",left,right);
     if(left<right) 
     {
         i=(left + right)/2;
-        merge_sort(a,left,i);
-        merge_sort(a,i+1,right);
+        merge_sort_rec(a,left,i);
+        merge_sort_rec(a,i+1,right);
         merge(a,left,i,right);
     }
 }
 
 //归并排序，非递归版(推荐)
-void merge_sort2(int *a,int left,int right)
+void merge_sort(int *a,int left,int right)
 {
-    int i=0,k=0;
-//    for()
+    int i=0,k=2;
+    //数组的长度=right+1
+    //k是归并时增长的步长
+    while(k<=right+1)
+    {
+        i=0;
+        //内while循环归并后的序列长度为k
+        while(i+k<=right+1)
+        {
+            //printf("merge(%d,%d,%d)\n",i,i+k/2-1,i+k-1);
+            merge(a,i,i+k/2-1,i+k-1);
+            i+=k;
+        }
+        //如果剩下两个子序列,他们肯定不够while里的归并长度，在这里把他们归并
+        //如果不剩(i==right)或者只剩一个子序列(i+k/2-1==right)，什么也不用做
+        if(i+k/2-1<right)
+        {
+            merge(a,i,i+k/2-1,right);
+            //printf("merge(%d,%d,%d)\n",i,i+k/2-1,right);
+        }
+        k*=2;
+    }
+    //最后一次归并
+    //printf("last merge(%d,%d,%d)\n",left,k/2-1,right);
+    merge(a,left,k/2-1,right);
 }
+
 void print(int *a,int n)
 {
     int i;
@@ -183,8 +206,8 @@ void main()
     insertion_sort(a4,10);  print(a4,10);
     shell_insert_sort(a5,10);print(a5,10);
     heap_sort(a6,10);       print(a6,10);
-    merge_sort(a7,0,9);     print(a7,10);
-//    merge_sort2(a8,0,9);    print(a8,10);
+    merge_sort_rec(a7,0,9);     print(a7,10);
+    merge_sort(a8,0,9);    print(a8,10);
 
     //如果排序前要手动获得数组长度，用sizeof：
     //printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
