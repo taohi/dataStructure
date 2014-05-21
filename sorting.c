@@ -106,10 +106,6 @@ void heap_sort(int *a,int n)
     }
 }
 
-<<<<<<< HEAD
-//归并排序需要用到的merge函数
-=======
->>>>>>> 8337a04580ec0bcdbe70d0d0adcff7e3645ef763
 void merge(int *array,int left,int m,int right)
 {
     int i,j,k=0,l;
