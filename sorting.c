@@ -106,8 +106,7 @@ void heap_sort(int *a,int n)
     }
 }
 
-//归并排序，递归版本
-//O(nlogn) Stable. spare space  O(n+logn)
+//归并排序需要用到的merge函数
 void merge(int *array,int left,int m,int right)
 {
     int i,j,k=0,l;
@@ -139,14 +138,16 @@ void merge(int *array,int left,int m,int right)
     free(merged);
 }
 
-void merge_sort(int *a,int left,int right)
+//归并排序，递归版本
+//O(nlogn) Stable. spare space  O(n+logn)
+void merge_sort_recursive(int *a,int left,int right)
 {
     int i=0;
     if(left<right) 
     {
         i=(left + right)/2;
-        merge_sort(a,left,i);
-        merge_sort(a,i+1,right);
+        merge_sort_recursive(a,left,i);
+        merge_sort_recursive(a,i+1,right);
         merge(a,left,i,right);
     }
 }
@@ -175,7 +176,7 @@ void main()
     insertion_sort(a4,10);  print(a4,10);
     shell_insert_sort(a5,10);print(a5,10);
     heap_sort(a6,10);       print(a6,10);
-    merge_sort(a7,0,9);     print(a7,10);
+    merge_sort_recursive(a7,0,9);     print(a7,10);
 
     //如果排序前要手动获得数组长度，用sizeof：
     //printf("Array a1 length =%d\n",sizeof(a1)/sizeof(int));
