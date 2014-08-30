@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <queue>
 #include <stack>
 using namespace::std;
@@ -153,6 +154,17 @@ void insertBST(treeNode ** pT,int x)
         insertBST(&((*pT)->rchild),x);
 }
 
+//判断给出的树是不是二叉排序树
+bool isBST(treeNode *T,int low,int high)
+{
+    if(!T)
+        return true;
+    if(low < T->data && T->data <high)
+        return isBST(T->lchild,low,T->data) && isBST(T->rchild,T->data,high);
+    else
+        return false;
+}
+
 //Binary Sorted Tree:二叉排序树
 //判断值x是否在给定的二叉排序树中。
 int searchBST(treeNode *T,int x)
@@ -228,6 +240,7 @@ int main()
     printf("LevelOrder(Queue):\t"); levelOrderTraverse(T); printf("\n");
     printf("tree depth(Recursive):\t%d\n",treeDepth(T));
     printf("tree leaves(Recursive):\t%d\n",countLeaf(T));
+    printf("tree is %s BST.\n",isBST(T,INT_MIN,INT_MAX)?"":"not");
     printf("%d is %s in BST tree.\n",find_key,searchBST(T,find_key)?"":"not");
     freeTree(&T);
     return 0;
