@@ -43,6 +43,8 @@ void PostOrderTraverse(treeNode * T)
     printf("%d\t",T->data);
 }
 
+
+
 /*二叉树层序遍历（使用链式队列）
  *过程描述： 
  * 1.初始化一个队列queue;
