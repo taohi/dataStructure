@@ -113,7 +113,7 @@ void postOrderStack(treeNode *T)
     }
 }
 
-//二叉树层序遍历,队列方法
+//二叉树层序遍历,队列方法,空间O(n)
 void levelOrderTraverse(treeNode *T) 
 {
      queue<treeNode *>nodeQueue;
@@ -130,6 +130,22 @@ void levelOrderTraverse(treeNode *T)
              nodeQueue.push(pHead->rchild);
      }
 }
+
+/*
+//二叉树层序遍历，空间O(h)，h为树的高度
+void levelOrderTraverse2(treeNode *T)
+{
+    int depth=treeDepth(T);
+    int cur_depth=1;
+    if(!T) return;
+    for(cur_depth=1;cur_depth<depth;cur_depth++)
+    {
+        
+    }
+}
+
+*/
+
 
 //按值x大小插入，构建二叉排序树BST
 void insertBST(treeNode ** pT,int x)
