@@ -97,7 +97,8 @@ void postOrderStack(treeNode *T)
     while(!s.empty())
     {
         cur=s.top();
-        if((cur->lchild==NULL && cur->rchild==NULL)||(pre!=NULL &&(pre==cur->lchild||pre==cur->rchild)))
+        if((cur->lchild==NULL && cur->rchild==NULL)||
+             (pre!=NULL &&(pre==cur->lchild||pre==cur->rchild)))
         {
             printf("%d\t",cur->data);
             s.pop();
